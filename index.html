@@ -31,7 +31,7 @@
 
     <form action="">
       <label>user name:</label>
-      <input type="text">
+      <input detype="text">
     </form>
 
     <div class="above-game">
@@ -98,7 +98,8 @@
     let maxScore = 0;
     let maxUser = '';
     setInterval(() => {
-      $.get('http://localhost:3000/game-data')
+      // $.get('http://localhost:3000/game-data')
+      $.get('http://18.144.24.30:3000/2048')
         .then((data) => {
           console.log('data from get: ', data);
           data.forEach((item) => {
@@ -119,6 +120,7 @@
         });
     }, 1000);
 
+    document.querySelector('input').value = 'default name'
   </script>
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
