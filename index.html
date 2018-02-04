@@ -26,6 +26,14 @@
       </div>
     </div>
 
+    <h2 id='topUser'>number #1 user: </h2>
+    <h3 id='topScore'>number #1 user's score: </h3>
+
+    <form action="">
+      <label>user name:</label>
+      <input type="text">
+    </form>
+
     <div class="above-game">
       <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
       <a class="restart-button">New Game</a>
@@ -85,6 +93,33 @@
     </p>
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    let maxScore = 0;
+    let maxUser = '';
+    setInterval(() => {
+      $.get('http://localhost:3000/game-data')
+        .then((data) => {
+          console.log('data from get: ', data);
+          data.forEach((item) => {
+            if (item.score > maxScore) {
+              maxScore = item.score;
+              maxUser = item.user_name;
+            }
+          })
+
+          let userStr = 'number #1 user:';
+          let scoreStr = 'number #1 user score: ';
+          // console.log('maxUser: ', maxUser);
+          // console.log('maxScore: ', maxScore);
+
+          
+          document.querySelector('#topUser').textContent = `${userStr} ${maxUser}`
+          document.querySelector('#topScore').textContent = `${scoreStr} ${maxScore}`
+        });
+    }, 1000);
+
+  </script>
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
   <script src="js/animframe_polyfill.js"></script>

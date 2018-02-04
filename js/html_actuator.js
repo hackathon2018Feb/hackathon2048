@@ -1,3 +1,6 @@
+// const axios = require('axios');
+// import axios from 'axios'
+
 function HTMLActuator() {
   this.tileContainer    = document.querySelector(".tile-container");
   this.scoreContainer   = document.querySelector(".score-container");
@@ -21,6 +24,34 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
+
+
+
+    const userName =  document.querySelector('input').value
+    metadata.user_name = userName;
+
+
+    let obj = {};
+    obj.user_name = metadata.user_name;
+    obj.score = metadata.score;
+    console.log('obj: ', obj);
+
+    // $.post('http://localhost:3000/game-data', obj)
+    //   .then((data) => {
+    //     console.log('data: ', data);
+
+    //   });
+
+
+    $.post('http://18.144.24.30:3000/2048', JSON.stringify(obj))
+      .then((data) => {
+        console.log('data: ', data);
+
+      });
+
+
+
+    console.log('metadata: ', metadata);
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
 
